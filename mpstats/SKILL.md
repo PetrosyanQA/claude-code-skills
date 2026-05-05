@@ -172,6 +172,7 @@ If token is missing, follow the 2-option flow from **Token Onboarding (Mandatory
 | `wb/wb-category.sh` | WB category products | `./scripts/wb/wb-category.sh "Электроника/Смартфоны" 2024-01-01 2024-03-01` |
 | `wb/wb-category-stats.sh` | WB category breakdown (subcategories/brands/sellers/trends) | `./scripts/wb/wb-category-stats.sh "Электроника" subcategories` |
 | `wb/wb-sku.sh` | WB SKU analytics (full/sales/balance/keywords/comments) | `./scripts/wb/wb-sku.sh 152490541 sales` |
+| `wb/wb-card-content.sh` | WB card content (description, characteristics, dimensions) — uses WB CDN, not MPSTATS | `./scripts/wb/wb-card-content.sh 290784358 .description` |
 | `wb/wb-brand.sh` | WB brand products or analytics | `./scripts/wb/wb-brand.sh "Nike" products` |
 | `wb/wb-seller.sh` | WB seller products or analytics | `./scripts/wb/wb-seller.sh 123456 products` |
 | `wb/wb-search.sh` | WB subjects/niches list for research | `./scripts/wb/wb-search.sh` |
@@ -198,7 +199,9 @@ Run any script with `--help` for full parameter reference.
 
 ### When to use which script
 
-- User asks about a **product/SKU** on WB → `wb/wb-sku.sh <sku> sales`
+- User asks about a **product/SKU** on WB (analytics) → `wb/wb-sku.sh <sku> sales`
+- Need **WB card description / characteristics / exact dimensions** (e.g. for card design, copy, content audit) → `wb/wb-card-content.sh <sku>` — note: this uses WB CDN, not MPSTATS API; MPSTATS does not return card content
+- Working on **WB card design or copywriting** → run `wb-sku.sh <sku> full` AND `wb-card-content.sh <sku>` in parallel for full picture (metrics + content)
 - User asks about a **product/SKU** on Ozon → `ozon/ozon-sku.sh <sku>`
 - User asks about a **product/SKU** on YM → `ym/ym-sku.sh <id>`
 - User asks about a **WB category** (products, revenue, top sellers) → `wb/wb-category.sh`

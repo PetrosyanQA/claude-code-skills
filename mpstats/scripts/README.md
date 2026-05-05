@@ -24,6 +24,7 @@ Scripts are grouped by domain:
 | `wb/wb-brand.sh` | Brand products and aggregate reports | Brand-level analytics |
 | `wb/wb-seller.sh` | Seller products and aggregate reports | Seller-level analytics |
 | `wb/wb-sku.sh` | SKU-level reports via `items/{id}/{report}` | Item info/sales/stocks/keywords/comments/FAQ |
+| `wb/wb-card-content.sh` | Card content (description, characteristics, dimensions) via WB CDN — **not** MPSTATS API | Card design/copywriting/content audit when MPSTATS analytics is not enough |
 | `wb/wb-search.sh` | Subjects/niches list (`POST subject/list`) | Niche discovery and subject lookup |
 | `wb/wb-subject.sh` | Subject-level methods (`subject/*`) | Subject analytics by subject id |
 | `wb/wb-similar.sh` | Similar families (`identical`, `identical_wb`, `similar`, `in_similar`) | Similar product analysis for SKU/url |
