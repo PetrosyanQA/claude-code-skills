@@ -102,92 +102,244 @@ Use the relevant subset for the task:
 
 ### MPSTATS Brand Color System
 
-Reports MUST use the MPSTATS brand palette (green + white). Never use blue, purple, or other off-brand accents.
+Reports MUST use the MPSTATS brand palette: bright green on near-white. **Values below are extracted from the official MPSTATS PPTX template** — do not approximate, use the exact hex codes.
 
 **Core palette:**
 
 | Role | Hex | Usage |
 |------|-----|-------|
-| Primary green | `#00B956` | Accent, buttons, active elements, chart primary |
-| Dark green | `#007A3D` | Hero gradients, headings, strong emphasis |
-| Deep green | `#004D26` | Darkest hero background, text on light |
-| Light green bg | `#E8F5E9` | Summary boxes, positive callouts, soft fill |
-| Mint tint | `#F0FFF4` | Subtle section backgrounds |
-| White | `#FFFFFF` | Paper, cards, primary background |
-| Dark text | `#1A1A2E` | Body copy |
-| Muted text | `#5A6872` | Labels, captions, secondary text |
-| Border/line | `#D9E0E7` | Dividers, table borders, card strokes |
-| Warm warning | `#C98900` | Warning callouts, caution badges |
-| Warning bg | `#FFF5DA` | Warning block background |
-| Risk red | `#C23B32` | Risk callouts, negative badges |
+| Primary green | `#17BF50` | Accent, headings emphasis, chart primary, decorative orbs |
+| Accent green (light) | `#4DF085` | Highlights inside green orbs, secondary accents |
+| Ink (near-black) | `#171B20` | Headlines, body copy on light backgrounds |
+| Muted text | `#676F79` | Labels, captions, subtitles, secondary text |
+| Line (strong) | `#D3D2D2` | Stronger dividers, table borders |
+| Line (soft) | `#DBE0E4` | Card strokes, subtle separators |
+| Paper | `#F9FAFB` | Card background |
+| Background | `#F3F5F7` | Page / canvas background |
+| White | `#FFFFFF` | Inner content background where needed |
+| Pure black | `#000000` | Wordmark, max-contrast text only |
+
+The brand template does NOT use red/amber/risk colors decoratively. For analytics, risk and warning callouts are allowed but should be desaturated and used sparingly — they are utility colors, not brand colors:
+
+| Role | Hex | Usage |
+|------|-----|-------|
+| Risk (utility) | `#C23B32` | Risk badges, negative deltas only |
 | Risk bg | `#FDEBEA` | Risk block background |
-| Good green | `#0F9D58` | Positive badges (secondary to primary green) |
-| Good bg | `#E7F6ED` | Positive block background |
+| Warn (utility) | `#C98900` | Caution badges only |
+| Warn bg | `#FFF5DA` | Warning block background |
 
-**Chart colors (contrasting palette):**
+**Chart colors:**
 
-Use green as the primary series. For multi-series charts, use this ordered set:
+Primary series is always `#17BF50`. Two-series charts: `#17BF50` vs `#D3D2D2` (green vs muted gray). Multi-series, in order:
 
-1. `#00B956` — primary (MPSTATS green)
-2. `#FF6B35` — orange (contrast)
-3. `#2D77D0` — blue (neutral complement)
-4. `#9B59B6` — purple
-5. `#F39C12` — amber
-6. `#1ABC9C` — teal
+1. `#17BF50` — primary
+2. `#171B20` — ink (high contrast)
+3. `#676F79` — muted
+4. `#4DF085` — accent light
+5. `#C98900` — amber (only if a 5th line is unavoidable)
 
-For bar/pie charts with 2 segments: `#00B956` vs `#E0E0E0` (green vs gray).
+The brand prefers monochromatic charts (green + neutrals). Do NOT introduce blue, purple, or teal — these are off-brand.
 
 **CSS variables template for HTML reports:**
 
 ```css
 :root {
-  --bg: #F7F9FB;
-  --paper: #FFFFFF;
-  --ink: #1A1A2E;
-  --muted: #5A6872;
-  --line: #D9E0E7;
-  --accent: #00B956;
-  --accent-dark: #007A3D;
-  --accent-deep: #004D26;
-  --accent-soft: #E8F5E9;
-  --accent-tint: #F0FFF4;
-  --good: #0F9D58;
-  --good-soft: #E7F6ED;
+  --bg: #F3F5F7;
+  --paper: #F9FAFB;
+  --card: #FFFFFF;
+  --ink: #171B20;
+  --muted: #676F79;
+  --line: #DBE0E4;
+  --line-strong: #D3D2D2;
+  --accent: #17BF50;
+  --accent-light: #4DF085;
+  --good: #17BF50;
   --warn: #C98900;
   --warn-soft: #FFF5DA;
   --risk: #C23B32;
   --risk-soft: #FDEBEA;
-  --card-shadow: 0 12px 32px rgba(0, 77, 38, 0.06);
+  --radius-card: 24px;
+  --radius-block: 12px;
+  --card-shadow: 0 8px 24px rgba(23, 27, 32, 0.04);
 }
 ```
 
-**Hero section gradient:** always use green tones, never blue.
+### Typography
+
+The brand font is **Manrope** (variable, weights 400/600/700/800). Fallback stack: `Manrope, "Helvetica Neue", Arial, sans-serif`. For data/numbers, Manrope works well at all sizes; if a tabular figure feel is needed, use `font-variant-numeric: tabular-nums`.
+
+**Type scale** (extracted from template, in pt → px equivalents for HTML at 96 DPI):
+
+| Role | Size | Weight | Notes |
+|---|---|---|---|
+| Hero stat / big number | 60-80pt (80-110px) | 800 | KPI cards, headline metrics |
+| Section heading | 45-50pt (60-67px) | 700 | Page titles, deep-dive headings |
+| Subheading | 22-30pt (30-40px) | 700 | Block titles, chart titles |
+| Body large | 18-22pt (24-30px) | 600 | Lede paragraphs, callouts |
+| Body | 12-15pt (16-20px) | 400-600 | Main copy, table rows |
+| Caption / label | 9-11pt (12-15px) | 600 uppercase, or 400 | Axis labels, table headers, footers |
+
+Body: line-height 1.4-1.5. Headings: line-height 1.1-1.2. Letter-spacing on captions/labels: `0.04em` uppercase.
+
+### Content must never be clipped
+
+HTML reports flow — they are **not** fixed-page slides. A "slide" in this style is a wide rounded card on the page, not a 16:9 box with hard edges. Therefore:
+
+- Use `min-height: 720px; height: auto` (never `height: 720px`) on the card container
+- Never set `overflow: hidden` on the card — overflow means a layout bug, not something to mask
+- Put the footer meta in normal flow (`margin-top: auto` inside a flex column), not `position: absolute` — absolute footers overlap content as soon as the content grows
+- When content doesn't fit visually balanced, **shrink the content** (tighter note, smaller callout, less prose), not the container
+- Inside two-column layouts, set `align-items: stretch` so columns match height; don't fix column heights with `calc()` against the parent
+
+If you notice a layout that needs `overflow: hidden` to look right, the layout is wrong — fix the layout. Never accept clipped text, especially numbers, anomaly notes, or footnotes — these are exactly the things a user needs to read.
+
+### PDF export — pagination rules (mandatory)
+
+If the report is going to be printed or exported to PDF (via `print`, `puppeteer`, `weasyprint`, `prince`, etc.), browsers do **not** preserve backgrounds, do **not** keep cards together, and split tables mid-row by default. You must include print CSS explicitly.
+
+**Rules:**
+
+- **One `.slide` = one page.** Each slide gets `page-break-after: always` / `break-after: page`. Set `@page { size: 1280px 720px; margin: 0 }` to match the slide canvas (or `size: A4 landscape; margin: 0` if you prefer paper sizing).
+- **Backgrounds must print.** Use `print-color-adjust: exact` and the `-webkit-` prefix on `html, body` and `body *`. Without it, browsers strip card backgrounds, callout fills, and decorative orbs.
+- **Cards/blocks/callouts never split.** Apply `break-inside: avoid` (and `page-break-inside: avoid` for legacy) to `.kpi`, `.block`, `.callout`, `.table-note`.
+- **Table rows never split, headers repeat.** Set `thead { display: table-header-group }`, `tfoot { display: table-footer-group }`, `tr { break-inside: avoid }`. If a table spans pages, the header re-appears on each.
+- **Fix slide dims for print.** In `@media print`, lock `.slide { width: 1280px; height: 720px; min-height: 720px; box-shadow: none; border-radius: 0 }`. The rounded card style is for screen; on a printed page the page IS the card.
+- **Drop the last page-break.** `.slide:last-of-type { break-after: auto }` prevents a trailing blank page.
+
+**Required print-CSS block (copy verbatim into the report's `<style>`):**
+
 ```css
-.hero {
-  background: linear-gradient(135deg, #004D26 0%, #007A3D 55%, #00B956 100%);
-  color: white;
+@page {
+  size: 1280px 720px;
+  margin: 0;
+}
+
+@media print {
+  html, body {
+    background: var(--paper);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .slide {
+    margin: 0;
+    width: 1280px;
+    height: 720px;
+    min-height: 720px;
+    box-shadow: none;
+    border-radius: 0;
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .slide:last-of-type { page-break-after: auto; break-after: auto; }
+
+  .kpi, .block, .callout, .table-note { break-inside: avoid; page-break-inside: avoid; }
+
+  thead { display: table-header-group; }
+  tfoot { display: table-footer-group; }
+  tr     { break-inside: avoid; page-break-inside: avoid; }
 }
 ```
 
-### Visual language
+**Content fit:** in screen mode a slide grows under content (`min-height: 720px`, see «Content must never be clipped»); in print mode it is locked to one page. Therefore **each slide must fit a single 1280×720 canvas**. If it doesn't fit on screen at that size, the PDF will clip — solve at the content level (split into two slides, shrink callouts, fewer table rows), never by enlarging the print page.
 
-Prefer styling that feels close to marketplace analytics products:
+**Recommended export commands:**
 
-- calm light background (white or very light green tint)
-- MPSTATS green as the primary accent color
-- cards for KPIs with subtle green accents
-- compact comparison tables
-- highlighted takeaway boxes with green borders/backgrounds
-- risk/caveat blocks styled with warning/risk colors (not green)
-- branded header with MPSTATS green gradient
+```bash
+# Chrome / Chromium headless (best fidelity with web fonts, SVG charts, orbs)
+chrome --headless --disable-gpu --no-margins \
+       --print-to-pdf=report.pdf --print-to-pdf-no-header \
+       --no-pdf-header-footer file://"$PWD"/report.html
 
-Avoid:
+# Puppeteer (Node) — pass { printBackground: true, preferCSSPageSize: true }
+# WeasyPrint (Python) — respects @page and break-* properties out of the box
+```
 
-- blue, purple, or other off-brand accent colors
-- generic blog-like layouts
-- overly playful landing-page styles
-- loud gradients unrelated to MPSTATS green
-- decorative elements that compete with the data
+Always pass a flag equivalent to `printBackground: true` / `--no-margins` — otherwise the print engine strips backgrounds and adds its own header/footer.
+
+### Visual motif: light card + green 3D orbs
+
+The brand's signature is **soft-rendered 3D green orbs and leaf shapes** placed in the corners of a light rounded card on a near-white background. This is the recognizable MPSTATS look — flat green gradients are NOT the brand.
+
+**Cover / hero page recipe:**
+
+- Page background: `#F3F5F7`
+- Centered rounded card: `#F9FAFB`, `border-radius: 24-32px`, soft shadow `0 8px 24px rgba(23,27,32,0.04)`
+- 3D green orb decorations in 2-3 corners of the card (top-left, top-right, bottom-right). Orbs are spherical with subtle highlight; some are textured (mesh-like). Real renders, not CSS gradients — use static PNG/SVG assets when available.
+- Logo `mpstats` top-left of the card (green square mark + black wordmark)
+- Title: 60-80pt, weight 800, `#171B20`, left-aligned
+- Subtitle: 22-30pt, `#676F79`, regular weight, below the title with `margin-top: 16px`
+
+If 3D orb assets are unavailable, use a **fallback**: small clusters of overlapping circles in `#17BF50` / `#4DF085` with `filter: blur(4px)` and `opacity: 0.7-0.9`. Place them in corners, never across the content area.
+
+**Section / content page recipe:**
+
+- Same `#F3F5F7` page, same rounded card, but with **muted orbs** (only 1-2, smaller, in a single corner) so they don't compete with data
+- Top row: section number + section title + page meta (date, source) on the right
+- Content grid: 2-3 columns of KPI cards or a wide chart block + narrower commentary column
+
+**Avoid:**
+
+- Linear gradient hero banners (the old `linear-gradient(135deg, #004D26 → #00B956)` look is wrong — that is NOT this brand)
+- Blue / purple / teal accents
+- Multiple competing decorative elements per slide
+- Heavy drop shadows or glassmorphism
+- Dark page backgrounds (the brand is light-first)
+
+### KPI card recipe
+
+```
+.kpi {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-block);
+  padding: 24px 28px;
+}
+.kpi__label { color: var(--muted); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.kpi__value { color: var(--ink); font-size: 56px; font-weight: 800; line-height: 1.05; margin-top: 8px; }
+.kpi__delta--up { color: var(--accent); font-weight: 700; }
+.kpi__delta--down { color: var(--risk); font-weight: 700; }
+```
+
+Use compact grids: 3 or 4 KPIs per row, equal width, `gap: 16-20px`.
+
+### Table recipe
+
+- Header row: `background: transparent; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid var(--line-strong); padding: 12px 16px;`
+- Body rows: `border-bottom: 1px solid var(--line); padding: 14px 16px; color: var(--ink);`
+- Numeric columns: right-aligned, `font-variant-numeric: tabular-nums`
+- Top entity row (the "1st"): no special highlight; rely on order, not color
+- Deltas: `▲` in `#17BF50`, `▼` in `#C23B32`, both at 12-13px next to the number
+- No zebra-striping. No vertical grid lines. Borders only between rows.
+
+### Chart recipe
+
+- Single-series time chart: line in `#17BF50`, weight `2.5px`, with `#17BF50` filled area at `opacity: 0.08`
+- Axis lines: `#DBE0E4`, `1px`
+- Axis text: `#676F79`, `11-12px`, weight 500
+- Gridlines: only horizontal, `#DBE0E4` at `opacity: 0.6`
+- Title above the chart: 18-22px, weight 700, `#171B20`
+- Subtitle / caption: 12-13px, `#676F79`
+- Legend: small swatches `10×10px rounded 2px`, labels 12px `#171B20`
+- No 3D, no shadows on bars/lines, no dual-axis unless explicitly required
+
+### Takeaway / callout block
+
+```
+.callout {
+  background: rgba(23, 191, 80, 0.06);   /* tinted with --accent */
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 16px 20px;
+  color: var(--ink);
+}
+.callout__label { color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
+```
+
+For risk callouts: swap `--accent` for `--risk`, background `rgba(194, 59, 50, 0.05)`. Use only when a real risk is being flagged — not for decoration.
 
 ## Minimal output rules by task type
 

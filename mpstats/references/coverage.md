@@ -10,7 +10,7 @@ Yes: all documented methods are now invocable via scripts.
 
 1. Dedicated wrappers for major families:
 - Account: `scripts/account/account-limits.sh`
-- Wildberries: `scripts/wb/*.sh` including subject/similar/analytics/compare/warehouses (promotion-analysis removed in v2 API)
+- Wildberries: `scripts/wb/*.sh` including subject/similar/analytics/compare/warehouses
 - Ozon: `scripts/ozon/*.sh` including compare
 - Yandex Market: `scripts/ym/*.sh` including compare
 
@@ -24,6 +24,5 @@ Yes: all documented methods are now invocable via scripts.
 - Dedicated wrappers are optimized for common analytical flows.
 - Use `scripts/README.md` for "what script to run and when".
 - WB `subject/geography` is available in `scripts/wb/wb-subject.sh` via the new analytics/v1 API.
-- WB `wb-promotion-analysis.sh` is deprecated — the endpoint was removed from the analytics/v1 API.
 - All WB scripts now use the `https://mpstats.io/api/analytics/v1/wb/` base URL.
 - Many WB endpoints changed from GET to POST in the v2 migration.
