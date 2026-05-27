@@ -3,7 +3,7 @@ name: photo-editor
 description: "MPSTATS Photo Editor API. Use when generating product photos, photoshoots, infographics, recolors, in-action scenes, background removal/replacement, upscaling, prompt-based image edits for marketplace sellers (Wildberries, Ozon, YM)."
 license: MIT
 metadata:
-  author: esporykhin
+  author: mpstats
   version: "1.1.0"
 ---
 
